@@ -6,7 +6,7 @@
         }else{
             htmlspecialchars($str)
         }
-        return data;
+        return $data;
     }
 
 

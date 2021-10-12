@@ -31,8 +31,9 @@
             if(!(count($anvn) < 5 || count($lös) < 8)){
 
 
+            }else{
+                echo "fel";
             }
-            echo "fel";
        }
 
 
