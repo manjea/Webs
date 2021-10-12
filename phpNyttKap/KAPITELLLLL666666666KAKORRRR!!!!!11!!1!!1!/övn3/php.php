@@ -2,7 +2,12 @@
 
 
     foreach ($_COOKIE as $key => $value) {
-        $key
+        setcookie(
+            $key,
+            $value,
+            time() -1,
+            '/'
+        );
     }
 
     foreach ($_COOKIE as $key => $value) {
