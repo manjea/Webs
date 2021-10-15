@@ -8,15 +8,23 @@ require('func.php');
         $anvn = cleanData($anvn, true);
         $lös = cleanData($lös);
 
+        $correct = false;
+
 
 
         foreach ($users as $key => $value) {
-            if($anvn == $key){
-                if ($lös == $value) {
-                    header('Location: usersPage.php' . "?anvn={$key}");
+            if($anvn == $key && $lös == $value)
+            {
+                header('Location: usersPage.php' . "?anvn={$key}");
+                while (true){
+                    echo 'hej';
                 }
+                $correct = true;
             }
+
         }
+        
+        //if ()
         $errorStr = 'ogiltiga inmatningar';
         header('Location: php.php' . "?somedata={$errorStr}");
 

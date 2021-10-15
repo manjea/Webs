@@ -1,5 +1,5 @@
 <?php
-    $users = ["admin" => "admin"];
+    $users = ["admin" => "admin", "johan" => "pass"];
 
 
 
