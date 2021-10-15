@@ -14,7 +14,7 @@
     session_start();
 
 
-    if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 1){
+    if(isset($_SESSION['loggedIn'])){
         echo '<a href="logut.php">Logga ut</a> <br> <a href="sida1.php">En annan länk</a> <br> <a href="sida2.php">Ännu en annan länk</a> <br>';
         //man kan prova skriva in /sida1.php som url för att testa om man känner för det.
     }else{

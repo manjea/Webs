@@ -2,11 +2,11 @@
     session_start();
 
 
-    if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 1){
-        echo 'du är inloggad på sida 1';
+    if(!isset($_SESSION['loggedIn'])){
+        header("Location: login.php");
 
     }else{
-        echo 'du är utloggad på sida 1';
+        echo 'du är inloggad på sida 1';
+        echo '<a href="loggedIn.php"> tillbaka :)</a>';
     }
-    echo '<a href="loggedIn.php"> tillbaka :)</a>';
 ?>

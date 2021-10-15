@@ -15,8 +15,8 @@
 </html> 
 <?php
     session_start();
-
-    $_SESSION['loggedIn'] = 0;
+    session_unset();
+    session_destroy();
 
 
 ?>

@@ -23,6 +23,10 @@
     <?php
         session_start();
 
+        if(isset($_SESSION['loggedIn'])){
+            header('Location: loggedIn.php');
+        }
+
         if(isset($_POST['log'])){
             if($_POST['anv'] == 'root' && $_POST['lös'] == 'admin'){
                 $_SESSION['loggedIn'] = 1;
