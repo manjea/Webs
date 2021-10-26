@@ -2,9 +2,9 @@
     function cleanData($str, $isAnvn = false){
         $data = $str;
         if($isAnvn){
-            htmlspecialchars(stripslashes(trim($str)));
+            $data = htmlspecialchars(stripslashes(trim($str)));
         }else{
-            htmlspecialchars($str);
+            $data = htmlspecialchars($str);
         }
         return $data;
     }
