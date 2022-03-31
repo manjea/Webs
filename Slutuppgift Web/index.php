@@ -3,25 +3,25 @@
     <head>
         <meta charset="utf-8" />
         <title>Sessioner</title>
-        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link href="./inc/styles/style.css" rel="stylesheet" type="text/css" />
     </head>
     
     <body>
         <div id="wrapper">
             <header>
-                <?php include('../../../../inc/header.php'); ?>
+                <?php include('./inc/header.php'); ?>
             </header>
 
-            <section id="leftColumn">
+            <section id="nav-section">
                 <nav>
                     <?php 
-                        include('../../../../inc/nav.php'); 
+                        include('./inc/nav.php'); 
                     ?>
                 </nav>
-                <aside>
-                    <?php include('../../../../inc/aside.php'); ?>
-                </aside>
+                    
+                <hr />
             </section>
+
 
             <?php
                 $p = 'start';
@@ -30,38 +30,46 @@
                 }
                 switch ($p) {
                     case 'start':
-                        include('../../../../pages/start.php');
+                        include('./pages/start.php');
                         break;
 
-                    case 'kontakt':
-                        include('../../../../pages/contact.php');
+                    case 'about':
+                        include('./pages/about.php');
                         break;
 
-                    case 'blog':
-                        include('../../../../pages/blog.php');
+                    case 'browse':
+                        include('./pages/browse.php');
+                        break;
+
+                    case 'contact':
+                        include('./pages/contact.php');
+                        break;
+
+                    case 'findshop':
+                        include('./pages/findshop.php');
                         break;
 
                     case 'login':
-                        include('../../../../pages/login.php');
+                        include('./pages/login.php');
                         break;
                     
                     case 'logout':
-                        include('../../../../pages/logout.php');
+                        include('./pages/logout.php');
                         break;
                     
                     case 'register':
-                        include('../../../../pages/register.php');
+                        include('./pages/register.php');
                         break;
 
                     default:
-                    	include('../../../../pages/start.php');
+                    	include('./pages/start.php');
                         break;
                 }
             
             ?>
 
             <footer>
-                <?php include('../../../../inc/footer.php'); ?>
+                <?php include('./inc/footer.php'); ?>
             </footer>
         </div>
     </body>

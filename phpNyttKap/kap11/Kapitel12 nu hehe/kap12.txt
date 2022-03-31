@@ -1,0 +1,27 @@
+uppg1 
+{
+    SELECT Firstname, Lastname, Summa 
+    FROM customers 
+
+    INNER JOIN orders 
+    ON customers.CustomerId = orders.CustomerId;
+}
+
+
+uppg2
+{
+    SELECT country.Name, city.Name, city.Population, countrylanguage.Language 
+    FROM country 
+
+    INNER JOIN city 
+    ON city.CountryCode = country.Code 
+
+    INNER JOIN countrylanguage 
+    ON countrylanguage.CountryCode = country.Code;
+}
+
+
+uppg3
+{
+
+}

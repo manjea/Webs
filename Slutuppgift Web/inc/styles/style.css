@@ -1,0 +1,274 @@
+*, *::after, **::before{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    
+}
+
+body{
+    /* min-height: 100vh; */
+    margin-top: 16px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+:root{
+    --acent-color: #6a6aff;
+    --primary-color: #170A1C;
+    --secondary-color: #EFE9F4;
+    
+}
+
+/* HEADER STYLE */
+
+#wrapper{
+    min-height: 98vh;
+}
+
+#wrapper>header{
+    background-color: rgb(255, 255, 255);
+    height: 100px;
+}
+
+#header-logo-container{
+    width: max-content;
+}
+
+#header-logo-container>a>img{
+    height: 100px;
+    width: auto;
+}
+
+#login-button{
+    color: var(--secondary-color);
+    background-color: var(--acent-color);
+
+    font-size: 1.4em;
+    text-decoration: none;
+    padding: .4em .6em;
+    border-radius: 6px;
+}
+
+
+/* NAVBAR STYLE */
+
+#nav-section{
+    position: sticky;
+    top: 0px;
+
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+
+#nav-section>hr{
+    width: 90%;
+    margin-bottom: 0px;
+    border: 1px solid black;
+    height: 1px;
+}
+
+nav{
+    display:flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items:center;
+}
+
+nav>span{
+    display: flex;
+    width: 50%;
+    justify-content: center;
+}
+
+nav>span>ul{
+    padding: 0;
+    width: max-content;
+    display:inherit;
+    flex-direction: row;
+    justify-content: space-evenly;
+    list-style:none;
+    
+}
+
+nav>span>ul>li{
+    margin-left: 3em;
+
+    white-space: nowrap;
+}
+/* 
+nav>span>ul:first-child{
+    margin-left: 6em;
+} */
+
+nav>span>ul>li>a{
+    font-size: calc(1.6em * 1);
+    text-decoration: none;
+    color: black;
+}
+
+#checkout{
+    padding-right: 2em;
+}
+
+#checkout>a{
+    display: flex;
+    flex-wrap: nowrap;
+    text-decoration: none;
+    color: var(--acent-color);
+}
+
+#checkout-articles{
+    /* empty */
+}
+
+nav>span>#search-container{
+    display:inherit;
+    flex-direction: row;
+    height: 1.5rem;
+}
+
+nav>span>#search-container::after{
+    font-family: "Font Awesome 5 Brands"; 
+	font-weight: 400;
+    content: "\f002";
+}
+
+
+
+
+
+
+
+/* MAIN CONTENT PAGE STYLE */
+
+
+#wrapper>#main>h1{
+    font-size: 3rem;
+}
+
+#wrapper>#main{
+    margin: 0;
+    margin-top: 4em;
+    /* margin-bottom: 4em; */
+    padding-bottom: 8em;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#wrapper>#main> * {
+    /* width: max-content; */
+}
+
+
+
+/* CONTACT */
+
+form{
+    display: flex;
+}
+
+legend{
+    background-color: var(--acent-color);
+    color: var(--secondary-color);
+    font-size: 2em;
+    padding: .4em 1em;
+    border-radius: 5px;
+}
+
+fieldset{
+    border-radius: 5px;
+
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+fieldset>p{
+    padding-left: 2em;
+    padding-right: 2em;
+}
+fieldset>p>label{
+    font-size: 1.4em;
+}
+
+fieldset>p>input{
+    width: 20em;
+    padding: .8em;
+}
+
+fieldset>p>textarea{
+    width: 20em;
+    padding: .8em;
+    resize: none;
+}
+
+fieldset>p>input[type="file"]{
+    text-align-last: center;
+}
+
+fieldset>input[type="submit"]{
+    font-size: 1.6em;
+    border: none;
+    padding: .4em 1.2em;
+    border-radius: 5px;
+    background-color: var(--acent-color);
+    color: var(--secondary-color);
+}
+
+.register-error-msg{
+    height: 2em;
+    width: max-content;
+    color: red;
+}
+
+#login-btn{
+    width: max-content;
+    color: var(--primary-color);
+    margin-top: 1em;
+}
+
+
+/* FOOTER STYLE */
+
+
+#wrapper>footer>span {
+    flex: 1 0 0;
+}
+
+#wrapper>footer>span {
+    text-align: center;
+    color: seashell;
+}
+
+#wrapper>footer>span>*{
+    color: seashell;
+}
+
+#wrapper>footer{
+    display: flex;
+    margin-left: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    width: 100%;
+    justify-content: space-between;
+    height: 6rem;
+    align-items: center;
+    background-color: var(--acent-color);
+
+    max-height: 10%;
+    position: fixed;
+    bottom: 0px;    
+}
+
+
+
+
+

@@ -1,0 +1,26 @@
+*, *::before, *::after{
+    box-sizing:border-box;
+}
+.container{
+    /* display:flex; */
+    background:red;
+    width:600px;
+    height :300px;
+    border:1px solid black;
+    display:grid;
+
+    grid-template: 
+            "r m y"
+            "r m y"
+            "r m y";
+    
+}
+.box{
+    background:blue;
+    width:200px;
+    height:100px;
+    border:1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,55 @@
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+body{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+fieldset{
+    width:min-content;
+}
+
+.flex-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.side{
+    display: flex;
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    background-color: black;
+    border: 1px solid white;
+    color: white;
+}
+
+.grid-container{
+    display:grid;
+    background: black;
+    width: 300px;
+    height: 300px;
+    border:1px solid white;
+    grid-template: 
+            "s d d"
+            "s d d"
+            "s d d";
+}
+
+.grid-box{
+
+    background:black;
+    color: white;
+    width:100px;
+    height:100px;
+    border:1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}

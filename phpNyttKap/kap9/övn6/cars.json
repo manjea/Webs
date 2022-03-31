@@ -1,0 +1,19 @@
+{
+    "Cars": [
+        {
+            "RegistrationNumber": "AAA111",
+            "Model": "Volvo V90",
+            "Year": 2019
+        },
+        {
+            "RegistrationNumber": "BBB222",
+            "Model": "Subaru Impreza",
+            "Year": 1998
+        },
+        {
+            "RegistrationNumber": "CCC333",
+            "Model": "Toyota Corolla",
+            "Year": 2003
+        }
+    ]
+}
