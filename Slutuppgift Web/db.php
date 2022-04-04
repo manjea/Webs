@@ -38,6 +38,7 @@
                 $_SESSION['user_id'] = $row['user_id'];
                 $_SESSION['firstname'] = $row['firstname'];
                 $_SESSION['lastname'] = $row['lastname'];
+                $_SESSION['email'] = $row['email'];
                 return true;
             }
         }
@@ -72,6 +73,37 @@
             return true;
         }
         return false;
+    }
+
+    function fetchAllArticles($dbh){
+        $sql = "SELECT * FROM article";
+
+        $stmt = $dbh->prepare($sql);
+
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $row;
+    }
+
+    function fetchArticleById($id, $dbh){
+        $sql = "SELECT * FROM article WHERE article.article_id LIKE :id";
+
+        $stmt = $dbh->prepare($sql);
+
+        $stmt->bindValue('id', $id, PDO::PARAM_STR);
+
+        $stmt->execute();
+        
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+            
     }
 /*
     function getPosts($dbh){

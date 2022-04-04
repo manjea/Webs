@@ -1,3 +1,10 @@
+<?php
+    $loggedIn = false;
+    if(isset($_SESSION['loggedIn'])){
+        $loggedIn = true;
+    }
+?>
+
 
 <section id="main">
     <!-- Lägg till formulär -->
@@ -7,17 +14,17 @@
 
             <p>
                 <label for="namn">Full Name</label><br />
-                <input type="text" name="namn" id="namn" placeholder="namn" required><br>
+                <input type="text" name="namn" id="namn" placeholder="Per Karlsson" value="<?php if($loggedIn){echo $_SESSION['firstname'].' '.$_SESSION['lastname'];}else{echo '';} ?>" required><br>
             </p>
 
             <p>
                 <label for="email">Email</label><br />
-                <input type="email" name="email" id="email" placeholder="namn@example.uk" required><br>
+                <input type="email" name="email" id="email" placeholder="namn@example.uk" value="<?php if($loggedIn){echo $_SESSION['email'];}else{echo '';} ?>" required><br>
             </p>
             
             <p>
                 <label for="meddelandetext">Message</label><br />
-                <textarea name="meddelandetext" id="meddelandetext" cols="30" rows="10" placeholder="hejsan" required></textarea>
+                <textarea name="meddelandetext" id="meddelandetext" cols="30" rows="10" placeholder="Write here..." required></textarea>
             </p>
             
             <p>

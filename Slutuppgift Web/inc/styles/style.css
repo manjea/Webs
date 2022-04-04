@@ -17,7 +17,7 @@ body{
     --acent-color: #6a6aff;
     --primary-color: #170A1C;
     --secondary-color: #EFE9F4;
-    
+    --items-per-flex-row: 3;
 }
 
 /* HEADER STYLE */
@@ -74,13 +74,13 @@ nav{
     display:flex;
     flex-direction: row;
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
     align-items:center;
 }
 
 nav>span{
     display: flex;
-    width: 50%;
+    width: calc(100%/3);
     justify-content: center;
 }
 
@@ -91,18 +91,16 @@ nav>span>ul{
     flex-direction: row;
     justify-content: space-evenly;
     list-style:none;
-    
 }
+
+
 
 nav>span>ul>li{
-    margin-left: 3em;
-
+    margin-left: 1em;
+    margin-right: 1em;
     white-space: nowrap;
 }
-/* 
-nav>span>ul:first-child{
-    margin-left: 6em;
-} */
+
 
 nav>span>ul>li>a{
     font-size: calc(1.6em * 1);
@@ -111,7 +109,7 @@ nav>span>ul>li>a{
 }
 
 #checkout{
-    padding-right: 2em;
+    display: flex;
 }
 
 #checkout>a{
@@ -125,9 +123,19 @@ nav>span>ul>li>a{
     /* empty */
 }
 
-nav>span>#search-container{
+/* nav>span>#search-container{
     display:inherit;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 1.5rem;
+} */
+ 
+nav>span>#nav-list-right:first-child{
+    display:inherit;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     height: 1.5rem;
 }
 
@@ -137,6 +145,9 @@ nav>span>#search-container::after{
     content: "\f002";
 }
 
+#search-window{
+    padding: .4em 1em;
+}
 
 
 
@@ -234,6 +245,39 @@ fieldset>input[type="submit"]{
     color: var(--primary-color);
     margin-top: 1em;
 }
+
+
+
+/* START INDEX STYLE */
+
+.article-container{
+    display: flex;
+    width: 80%;
+    height: calc(900px/var(--items-per-flex-row));
+    flex-wrap: wrap;
+}
+
+.article-information-container{
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    width: calc(100%/var(--items-per-flex-row));
+}
+
+.article-information-container>img{
+    position: relative;
+    height: 250px;
+    top: 0;
+}
+
+.article-information-container>span{
+    position: relative;
+    height: 50px;
+    bottom: 0;
+}
+
+
+
 
 
 /* FOOTER STYLE */
