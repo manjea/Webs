@@ -1,5 +1,13 @@
 <span>
-    <p>login thingy</p>
+    <?php
+        if(isset($_SESSION['loggedIn'])){
+            echo '<a href="index.php?page=profile" class="profile-span">Profile
+            <i class="material-icons">person</i>
+            </a>';
+        }else{
+            echo '<span class="profile-span">Log in to go to profile</span>';
+        }
+    ?>
 </span>
 
 <span>

@@ -1,3 +1,4 @@
+
 *, *::after, **::before{
     box-sizing: border-box;
     margin: 0;
@@ -82,6 +83,14 @@ nav>span{
     display: flex;
     width: calc(100%/3);
     justify-content: center;
+}
+
+.profile-span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
 }
 
 nav>span>ul{
@@ -178,6 +187,29 @@ nav>span>#search-container::after{
 }
 
 
+/* BROWSE */
+
+#wrapper>#browse>h1{
+    font-size: 3rem;
+}
+
+#wrapper>#browse{
+    margin: 0;
+    margin-top: 4em;
+    /* margin-bottom: 4em; */
+    padding-bottom: 8em;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* #wrapper>#browse>.article-container>.article-information-container{
+    box-sizing: border-box;
+    border: black 1px solid;
+} */
+
 
 /* CONTACT */
 
@@ -253,27 +285,35 @@ fieldset>input[type="submit"]{
 .article-container{
     display: flex;
     width: 80%;
-    height: calc(900px/var(--items-per-flex-row));
+    height: max-content;
     flex-wrap: wrap;
+}
+
+.article-container>.article-information-container{
+    box-sizing: border-box;
+    border: black 1px solid;
 }
 
 .article-information-container{
     display: flex;
-    height: auto;
     flex-direction: column;
     width: calc(100%/var(--items-per-flex-row));
 }
 
 .article-information-container>img{
     position: relative;
-    height: 250px;
+    width:calc(100%);
+    height: auto;
     top: 0;
 }
 
 .article-information-container>span{
-    position: relative;
-    height: 50px;
+    display: flex;
+    height: 100%;
     bottom: 0;
+    align-items:flex-end;
+    justify-content: center;
+    padding-top: 50px;
 }
 
 

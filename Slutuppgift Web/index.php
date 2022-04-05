@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <title>Sessioner</title>
         <link href="./inc/styles/style.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     
     <body>
@@ -43,6 +44,10 @@
 
                     case 'contact':
                         include('./pages/contact.php');
+                        break;
+
+                    case 'profile':
+                        include('./pages/profile.php');
                         break;
 
                     case 'findshop':
