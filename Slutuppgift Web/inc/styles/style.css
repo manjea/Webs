@@ -55,6 +55,7 @@ body{
 /* NAVBAR STYLE */
 
 #nav-section{
+    z-index: 9999;
     position: sticky;
     top: 0px;
 
@@ -189,8 +190,31 @@ nav>span>#search-container::after{
 
 /* BROWSE */
 
-#wrapper>#browse>h1{
+#browse-header{
+    display: block;
+}
+
+#browse-header>h1{
     font-size: 3rem;
+}
+
+.article-type-header{
+    padding-top: 6em;
+}
+
+#browse-header>ul{
+    padding: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    list-style: none;
+}
+
+#browse-header>ul>li>a{
+    text-decoration: none;
+    color: var(--primary-color);
+    
+
 }
 
 #wrapper>#browse{

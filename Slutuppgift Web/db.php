@@ -2,7 +2,7 @@
     function connectToDB()
     {
         define ("DB_HOST", "localhost");
-        define ("DB_NAME", "web_slut_inl"); // byt till ditt databasnamn
+        define ("DB_NAME", "javlaskitprogram"); // byt till ditt databasnamn
         define ("DB_USER", "Web_inl_admin"); // byt till ditt användarnamn
         define ("DB_PASSWORD", "Web_inl_admin"); // byt till ditt lösenord
 
@@ -76,7 +76,7 @@
     }
 
     function fetchAllArticles($dbh){
-        $sql = "SELECT * FROM article";
+        $sql = "SELECT COUNT(article_id) FROM article";
 
         $stmt = $dbh->prepare($sql);
 
@@ -87,16 +87,31 @@
         return $row;
     }
 
-    function fetchArticleById($id, $dbh){
-        $sql = "SELECT * FROM article WHERE article.article_id LIKE :id";
+    function fetchArticleById($id, $dbh, $type=null){
+        if($type){
 
-        $stmt = $dbh->prepare($sql);
+            $sql = "SELECT * FROM article WHERE article.article_id = :id AND article.article_type = :type";
 
-        $stmt->bindValue('id', $id, PDO::PARAM_STR);
+            $stmt = $dbh->prepare($sql);
+
+            $stmt->bindValue('id', $id, PDO::PARAM_STR);
+
+            $stmt->bindValue('type', $type, PDO::PARAM_STR);
+
+            
+        }else{
+            $sql = "SELECT * FROM article WHERE article.article_id LIKE :id";
+
+            $stmt = $dbh->prepare($sql);
+
+            $stmt->bindValue('id', $id, PDO::PARAM_STR);
+        }
 
         $stmt->execute();
         
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $stmt->closeCursor();
 
         if($row){
             return $row;
@@ -104,6 +119,12 @@
             return false;
         }
             
+    }
+
+    function clear(){
+        if($stmt){
+            $stmt->clearCursor();
+        }
     }
 /*
     function getPosts($dbh){

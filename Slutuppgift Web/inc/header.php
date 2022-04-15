@@ -12,11 +12,11 @@
     }
 </style>
 
-<div class="header-container">
+<div id="top-jump" class="header-container">
     <span id="header-logo-container"><a href="index.php">
         <img src="./inc/images/logo-temp-toobig.png" alt="BRÖTHERS LOGO"></a></span>
 
-    <span><h1>BRÖTHERS</h1></span>
+    <span><h1 >BRÖTHERS</h1></span>
 
     <span>
         <?php

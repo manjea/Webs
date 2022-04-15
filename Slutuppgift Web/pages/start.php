@@ -45,7 +45,7 @@
             echo '
             <br />
             <p>
-                <a href="google.se" target="_blank">Browse More</a>
+                <a href="index.php?page=browse">Browse More</a>
             </p>';
             //bygg upp en sida
         }
