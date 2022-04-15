@@ -2,20 +2,23 @@
     <?php
         include_once('db.php');
         $dbh = connectToDB();
-        $row = fetchAllArticles($dbh);
+        $allArticles = fetchAllArticles($dbh);
+
+        $num_of_articles = $allArticles['COUNT(article_id)'];
+
 
         do {
-            $rand1 = rand(0, count($row));
+            $rand1 = rand(0, $num_of_articles);
             $rand1_info = fetchArticleById($rand1, $dbh);    
         }while($rand1_info == false);
 
         do {
-            $rand2 = rand(0, count($row));
+            $rand2 = rand(0, $num_of_articles);
             $rand2_info = fetchArticleById($rand2, $dbh);
         } while ($rand2 == $rand1 || $rand2_info == false);
 
         do {
-            $rand3 = rand(0, count($row));
+            $rand3 = rand(0, $num_of_articles);
             $rand3_info = fetchArticleById($rand3, $dbh);
         } while ($rand3 == $rand1 || $rand3 == $rand2 || $rand3_info == false);
 
@@ -50,7 +53,7 @@
             //bygg upp en sida
         }
         else{
-            //bygg upp en annan sida
+            echo 'ehh logga in ig';
         }
     ?>
 
