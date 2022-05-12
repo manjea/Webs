@@ -5,6 +5,7 @@
         <title>Sessioner</title>
         <link href="./inc/styles/style.css" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="./scripts/CartScripts.js"></script>
     </head>
     
     <body>
@@ -50,6 +51,14 @@
                         include('./pages/profile.php');
                         break;
 
+                    case 'checkout':
+                        include('./pages/checkout.php');
+                        break;
+
+                    case 'recipies':
+                        include('./pages/recipies.php');
+                        break;
+
                     case 'findshop':
                         include('./pages/findshop.php');
                         break;
@@ -66,9 +75,9 @@
                         include('./pages/register.php');
                         break;
 
-                    default:
+                    /*default:
                     	include('./pages/start.php');
-                        break;
+                        break;*/
                 }
             
             ?>

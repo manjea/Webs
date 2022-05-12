@@ -20,7 +20,7 @@
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $password = $_POST['password']; //passwords behöver inte sanitizas eftersom de hasha ändå;
 
-        $sql = "SELECT * FROM customer WHERE email LIKE :em";
+        $sql = "SELECT * FROM customer WHERE mail LIKE :em";
 
 
 
@@ -51,11 +51,13 @@
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);//passwords behöver inte sanitizas eftersom de hasha ändå;
 
-        if(!($password > 5)){
+        if(!($_POST['password'] > 5)){
             return false;
         }
 
-        $sql = "INSERT INTO customer (firstname, lastname, email, password) VALUES (:fn, :ln, :em, :pw)";
+        //$sql = "INSERT INTO customer (firstname, lastname, mail, password) VALUES (:fn, :ln, :em, :pw)";
+
+        $sql = 'INSERT INTO `customer` (`firstname`, `lastname`, `mail`, `password`) VALUES (:fn, :ln, :em, :pw)';
 
         $stmt = $dbh->prepare($sql);
 
@@ -68,8 +70,10 @@
 
         $stmt->bindValue('pw', $password, PDO::PARAM_STR);
 
+        
+        $stmtExec = $stmt->execute();
 
-        if($stmt->execute()){
+        if($stmtExec){
             return true;
         }
         return false;
@@ -121,50 +125,18 @@
             
     }
 
-    function clear(){
-        if($stmt){
-            $stmt->clearCursor();
-        }
+    function mailTo(){
+        $name = filter_input(INPUT_POST, 'namn', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $messagetext = filter_input(INPUT_POST, 'meddelandetext', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+
+        $subject = $name;
+        $to_email_address = "manjea@edu.umea.se"; //här kan du byta om du vill skicka till dig själv
+        $message = $messagetext . '\n' . $email;
+
+        mail($to_email_address,$subject,$message);
+
     }
-/*
-    function getPosts($dbh){
-        $user_id = $_SESSION['user_id'];
-        
-        $sql = "SELECT * 
-                FROM posts 
-                INNER JOIN users 
-                ON posts.from_user_id = users.user_id 
-                AND posts.to_user_id = :my_uid";
-
-        $stmt = $dbh->prepare($sql); 
-
-        $stmt->bindValue('my_uid', $user_id, PDO::PARAM_INT);
-
-        return $stmt;
-    }
-*/
-/*
-    function addPost($dbh){
-
-        $text = filter_input(INPUT_POST, 'text', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $val = $_POST['val'];
-        $user_id = $_SESSION['user_id'];
-        $sql = "INSERT INTO posts (to_user_id, from_user_id, text) VALUES (:t_uid, :f_uid, :t)";
-
-        $stmt = $dbh->prepare($sql);
-
-        $stmt->bindValue('t_uid', $val, PDO::PARAM_INT);
-
-        $stmt->bindValue('f_uid', $user_id, PDO::PARAM_INT);
-
-        $stmt->bindValue('t', $text, PDO::PARAM_STR);
-
-        $stmt->execute();
-        
-        header('Location: posts.php');
-    }
-*/
-
 
     function getAllUsers($dbh){
         $sql = "SELECT user_id, username FROM users";
@@ -172,6 +144,103 @@
         $stmt = $dbh->prepare($sql);
         
         $stmt->execute();   // false eller true     true -> $stmt får resultat
+
+        return $stmt;
+    }
+
+    function makePurchase($dbh){
+        $summa = 0;
+        $cartArray = explode(',',$_COOKIE['cart']);
+        //echo print_r($cartArray);
+
+        $sql = "INSERT INTO `order` (`user_id`, `summa`) VALUES (:uid, :sum)";
+
+        $stmt = $dbh->prepare($sql);
+
+        $stmt->bindValue('uid', $_SESSION['user_id'], PDO::PARAM_STR);
+        
+        $stmt->bindValue('sum', '0', PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        $sql = "INSERT INTO `order` (`user_id`, `summa`) VALUES ({$_SESSION['user_id']}, 0)";
+
+        //get order id somewhere her
+        //$dbh->exec($sql);
+        $last_id = $dbh->lastInsertId();
+
+        $stmt->closeCursor();
+
+        foreach ($cartArray as $key => $value) {
+            $pris = makeReciept($dbh, $value, $last_id);
+
+            $summa += $pris;
+        }
+
+        $sql = "UPDATE `order` SET `summa` = $summa WHERE `order_id` LIKE $last_id";
+
+        $stmt = $dbh->prepare($sql);
+
+        $stmt->execute();
+
+        unset($_COOKIE['cart']); 
+        setcookie('cart', null, -1, '/');
+
+        echo "your total is: " . $summa . "<br /><br /><br />";
+
+        
+    }
+
+    function makeReciept($dbh, $value, $order_id){
+        $row = fetchArticleById($value, $dbh);
+
+        $sql = 'INSERT INTO `reciept` (`order_id`, `article_id`, `amount`, `reciept_summa`) VALUES (:oid, :aid, :am, :sum)';
+
+        $stmt = $dbh->prepare($sql);
+
+        $stmt->bindValue('oid', $order_id, PDO::PARAM_STR);
+
+        $stmt->bindValue('aid', $value, PDO::PARAM_STR);
+
+        $stmt->bindValue('am', '1', PDO::PARAM_STR);
+
+        $stmt->bindValue('sum', $row['price'], PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        $stmt->closeCursor();
+
+        return $row['price'];
+    }
+
+    function getRecieptsToPrint($dbh, $order_id){
+        $sql = "SELECT 
+                * 
+                FROM `reciept` 
+                INNER JOIN 
+                `order` 
+                ON `order`.order_id LIKE {$order_id}
+                AND `reciept`.order_id LIKE `order`.order_id";
+
+        $stmt = $dbh->prepare($sql);
+
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+    function getAllOrders($dbh, $user_id){
+        $sql = "SELECT 
+                * 
+                FROM `order` 
+                INNER JOIN 
+                customer 
+                ON customer.user_id LIKE {$user_id} 
+                AND customer.user_id LIKE `order`.user_id;"; //lite roligt att passa in user_iud som ett argument hihi
+
+        $stmt = $dbh->prepare($sql);
+
+        $stmt->execute();
 
         return $stmt;
     }

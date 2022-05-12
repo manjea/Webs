@@ -37,16 +37,21 @@
 
         echo '<div class="article-container">
                 <span class="article-information-container">
-                    <img src="'.$rand1_info['article_img_path'].'" alt="">
-                    <span>'.$rand1_info['article_name'].'<br /> $'.$rand1_info['price'].'</span>
+                    <img src="'.$rand1_info['article_img_path'].'" alt="">';
+
+                    echo '<span>'.$rand1_info['article_name'].'<br /> $'.$rand1_info['price'].'</span>';
+
+                    echo '<button onclick="addToCart(' . $rand1_info['article_id'] . ')">Add to cart</button>
                 </span>
                 <span class="article-information-container">
                     <img src="'.$rand2_info['article_img_path'].'" alt="">
                     <span>'.$rand2_info['article_name'].'<br /> $'.$rand2_info['price'].'</span>
+                    <button onclick="addToCart(' . $rand2_info['article_id'] . ')">Add to cart</button>
                 </span>
                 <span class="article-information-container">
                     <img src="'.$rand3_info['article_img_path'].'" alt="">
                     <span>'.$rand3_info['article_name'].'<br /> $'.$rand3_info['price'].'</span>
+                    <button onclick="addToCart(' . $rand3_info['article_id'] . ')">Add to cart</button>
                 </span>
             </div>';
 
@@ -80,14 +85,17 @@
                 <span class="article-information-container">
                     <img src="'.$rand1_info['article_img_path'].'" alt="">
                     <span>'.$rand1_info['article_name'].'<br /> $'.$rand1_info['price'].'</span>
+                    <button onclick="addToCart(' . $rand1_info['article_id'] . ')">Add to cart</button>
                 </span>
                 <span class="article-information-container">
                     <img src="'.$rand2_info['article_img_path'].'" alt="">
                     <span>'.$rand2_info['article_name'].'<br /> $'.$rand2_info['price'].'</span>
+                    <button onclick="addToCart(' . $rand2_info['article_id'] . ')">Add to cart</button>
                 </span>
                 <span class="article-information-container">
                     <img src="'.$rand3_info['article_img_path'].'" alt="">
                     <span>'.$rand3_info['article_name'].'<br /> $'.$rand3_info['price'].'</span>
+                    <button onclick="addToCart(' . $rand3_info['article_id'] . ')">Add to cart</button>
                 </span>
             </div>';
 
@@ -121,14 +129,17 @@
                 <span class="article-information-container">
                     <img src="'.$rand1_info['article_img_path'].'" alt="">
                     <span>'.$rand1_info['article_name'].'<br /> $'.$rand1_info['price'].'</span>
+                    <button onclick="addToCart(' . $rand1_info['article_id'] . ')">Add to cart</button>
                 </span>
                 <span class="article-information-container">
                     <img src="'.$rand2_info['article_img_path'].'" alt="">
                     <span>'.$rand2_info['article_name'].'<br /> $'.$rand2_info['price'].'</span>
+                    <button onclick="addToCart(' . $rand2_info['article_id'] . ')">Add to cart</button>
                 </span>
                 <span class="article-information-container">
                     <img src="'.$rand3_info['article_img_path'].'" alt="">
                     <span>'.$rand3_info['article_name'].'<br /> $'.$rand3_info['price'].'</span>
+                    <button onclick="addToCart(' . $rand3_info['article_id'] . ')">Add to cart</button>
                 </span>
             </div>';
 
@@ -162,14 +173,17 @@
                 <span class="article-information-container">
                     <img src="'.$rand1_info['article_img_path'].'" alt="">
                     <span>'.$rand1_info['article_name'].'<br /> $'.$rand1_info['price'].'</span>
+                    <button onclick="addToCart(' . $rand1_info['article_id'] . ')">Add to cart</button>
                 </span>
                 <span class="article-information-container">
                     <img src="'.$rand2_info['article_img_path'].'" alt="">
                     <span>'.$rand2_info['article_name'].'<br /> $'.$rand2_info['price'].'</span>
+                    <button onclick="addToCart(' . $rand2_info['article_id'] . ')">Add to cart</button>
                 </span>
                 <span class="article-information-container">
                     <img src="'.$rand3_info['article_img_path'].'" alt="">
                     <span>'.$rand3_info['article_name'].'<br /> $'.$rand3_info['price'].'</span>
+                    <button onclick="addToCart(' . $rand3_info['article_id'] . ')">Add to cart</button>
                 </span>
             </div>';
 
@@ -183,17 +197,17 @@
 
         do {
             $rand1 = rand(0, $num_of_articles);
-            $rand1_info = fetchArticleById($rand1, $dbh);    
+            $rand1_info = fetchArticleById($rand1, $dbh, 'belt');    
         }while($rand1_info == false);
 
         do {
             $rand2 = rand(0, $num_of_articles);
-            $rand2_info = fetchArticleById($rand2, $dbh);
+            $rand2_info = fetchArticleById($rand2, $dbh, 'belt');
         } while ($rand2 == $rand1 || $rand2_info == false);
 
         do {
             $rand3 = rand(0, $num_of_articles);
-            $rand3_info = fetchArticleById($rand3, $dbh);
+            $rand3_info = fetchArticleById($rand3, $dbh, 'belt');
         } while ($rand3 == $rand1 || $rand3 == $rand2 || $rand3_info == false);
 
 
@@ -203,14 +217,17 @@
                 <span class="article-information-container">
                     <img src="'.$rand1_info['article_img_path'].'" alt="">
                     <span>'.$rand1_info['article_name'].'<br /> $'.$rand1_info['price'].'</span>
+                    <button onclick="addToCart(' . $rand1_info['article_id'] . ')">Add to cart</button>
                 </span>
                 <span class="article-information-container">
                     <img src="'.$rand2_info['article_img_path'].'" alt="">
                     <span>'.$rand2_info['article_name'].'<br /> $'.$rand2_info['price'].'</span>
+                    <button onclick="addToCart(' . $rand2_info['article_id'] . ')">Add to cart</button>
                 </span>
                 <span class="article-information-container">
                     <img src="'.$rand3_info['article_img_path'].'" alt="">
                     <span>'.$rand3_info['article_name'].'<br /> $'.$rand3_info['price'].'</span>
+                    <button onclick="addToCart(' . $rand3_info['article_id'] . ')">Add to cart</button>
                 </span>
             </div>';
 

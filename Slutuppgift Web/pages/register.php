@@ -5,11 +5,6 @@
             if (session_status() == PHP_SESSION_NONE) { 
                 session_start(); 
             }
-
-            $firstname = $_POST["firstname"]; 
-            $lastname = $_POST["lastname"];
-            $email = $_POST["email"];
-
         }
     ?>
 
@@ -19,6 +14,7 @@
             include_once('db.php');
             $dbh = connectToDB();
             $register_result = registerCustomer($dbh);
+            
             if($register_result){
                 header('Location: index.php?page=login');
             }

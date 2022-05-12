@@ -27,7 +27,16 @@
                 Varukorg
             </span>
             <span id="checkout-articles" -data-checkout-articles>
-                (0)
+                (<?php
+                    if(isset($_COOKIE['cart'])){
+                        $cart = $_COOKIE['cart'];
+                        $cartArray = explode(',',$cart);
+                        echo count($cartArray);
+                    }else{
+                        echo '0';
+                    }
+                 
+                 ?>)
             </span>
         </a>
     </span>

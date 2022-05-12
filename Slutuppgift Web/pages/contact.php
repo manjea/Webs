@@ -1,8 +1,21 @@
 <?php
+    include_once('db.php');
+
     $loggedIn = false;
     if(isset($_SESSION['loggedIn'])){
         $loggedIn = true;
     }
+
+    if(isset($_POST['send'])){
+        if($_SESSION["CSRFToken"] === $_POST["CSRFToken"]){
+            mailTo();
+        }
+        else{
+            $error = true;
+        }
+    }
+
+    $_SESSION["CSRFToken"] = bin2hex(random_bytes(32));
 ?>
 
 
@@ -11,6 +24,8 @@
     <form action="#" method="post">
         <fieldset>
             <legend>Contact</legend>
+
+            <input type="hidden" name="CSRFToken" value="<?php echo $_SESSION['CSRFToken'] ?>" />
 
             <p>
                 <label for="namn">Full Name</label><br />
@@ -33,7 +48,15 @@
                 <span style="font-size:12px;">*optional</span>
             </p>
 
-            <input type="submit" value="Send"></input>
+            <input type="submit" name="send" value="Send"></input>
+            <br />
+            <?php
+                if(isset($error)){
+                    if($error){
+                        echo '<span class="register-error-msg">Sluta spamma mig!!</span>';
+                    }
+                }
+            ?>
 
             <span id="login-btn">
                 Don't have an account? 
