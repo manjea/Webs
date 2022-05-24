@@ -11,14 +11,22 @@
     <?php
         $error = false;
         if(isset($_POST['submit'])){
-            include_once('db.php');
-            $dbh = connectToDB();
-            $register_result = registerCustomer($dbh);
-            
-            if($register_result){
-                header('Location: index.php?page=login');
+            try { //om dom tar bort required i formet och försöker skicka det. / om det inte funkar
+                include_once('db.php');
+                $dbh = connectToDB();
+
+                $register_result = registerCustomer($dbh);
+                
+                if($register_result){
+                    header('Location: index.php?page=login');
+                }
+                $error = true;
+                
+            } catch (\Throwable $th) {
+                echo 'Något gick fel vid anslutningen till databasen <br />';
             }
-            $error = true;
+            
+            
         }
     ?>
 

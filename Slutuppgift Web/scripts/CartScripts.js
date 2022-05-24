@@ -1,10 +1,10 @@
-function addToCart(articleId){
-    if (getCookie('cart') !== null){
-        let cookieValueArray = getCookieValue('cart');
+function addToCart(articleId){ //lägger till article i carten
+    if (getCookie('cart') !== null){ //om carten inte är tom
+        let cookieValueArray = getCookieValue('cart'); //hämta värdet av kakan
 
         let cookieValue = cookieValueArray.split('=')[0];
 
-        cookieValue= cookieValue.concat(",", articleId);
+        cookieValue= cookieValue.concat(",", articleId); //vi separerar varor med komman (,)
 
         createCookie('cart', cookieValue, 10);
     }
@@ -15,17 +15,13 @@ function addToCart(articleId){
     }
 }
 
-function EmptyCart(){
-    document.cookie = 'cart=; Max-Age=0; path=/; domain=' + location.host; //woooooooooo
-    
-    location.reload();
+function EmptyCart(){ //vi tar bort cart-kakan
+    document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 GMT;"; //ingen aning LOL Johan!
+
+    location.reload(); //laddar om!
 }
 
-function MakePurchase(){
-    
-}
-
-function createCookie(name, value, days) {
+function createCookie(name, value, days) { //skapar en kaka
     var expires;
     
     if (days) {
@@ -41,7 +37,7 @@ function createCookie(name, value, days) {
         escape(value) + expires + "; path=/";
 }
 
-function getCookie(name) {
+function getCookie(name) { //hämtar värdet av en kaka
     var dc = document.cookie;
     var prefix = name + "=";
     var begin = dc.indexOf("; " + prefix);
@@ -57,12 +53,11 @@ function getCookie(name) {
         end = dc.length;
         }
     }
-    // because unescape has been deprecated, replaced with decodeURI
-    //return unescape(dc.substring(begin + prefix.length, end));
+
     return decodeURI(dc.substring(begin + prefix.length, end));
 } 
 
-function getCookieValue(cname) {
+function getCookieValue(cname) { //returnerar kakans värde om den finns
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');

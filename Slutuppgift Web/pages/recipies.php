@@ -1,11 +1,6 @@
 <section id="main">
-    <style>
-        .article_nameSpan{
-
-        }
-        .reciept_summaSpan{
-
-        }
+<!-- lite style -->
+    <style>  
         .bigSpanContainerForReciept{
             
             display: flex;
@@ -25,24 +20,28 @@
         if (session_status() == PHP_SESSION_NONE) { 
             session_start(); 
         }
-    ?>
 
-    <?php
         if(!isset($_SESSION['user_id'])){
             header('Location: index.php?page=login');
         }
-        include_once('db.php');
-        $dbh = connectToDB();
+        try {
+            include_once('db.php');
+            $dbh = connectToDB();
+        } catch (\Throwable $th) {
+            echo 'Det gick inte att ansluta till databasen för tillfället!';
+            $dbh = null;
+        }
+
     ?>
 
     <?php
         $index = 1;
         
-        $stmt1 = getAllOrders($dbh, $_SESSION['user_id']);
+        $stmt1 = getAllOrders($dbh, $_SESSION['user_id']); //vi hämtar alla orders som hör till user:n
 
-        while($rad = $stmt1->fetch(PDO::FETCH_ASSOC))
+        while($rad = $stmt1->fetch(PDO::FETCH_ASSOC)) // för varje order hämtar vi alla reciepts och skriver ut dem
         {
-            $stmt = getRecieptsToPrint($dbh, $rad['order_id']);
+            $stmt = getRecieptsToPrint($dbh, $rad['order_id']); 
             echo '<p class="kvittoContainer">';
 
             echo 'Kvitto: ' . $index . '<br /><br />';
@@ -55,12 +54,13 @@
                 echo '<span class="bigSpanContainerForReciept"><span class="article_nameSpan">' . $articleRow["article_name"] . '</span><span class="reciept_summaSpan">' .'$'. $row["reciept_summa"] . '</span></span>';
                 echo '<br />';
             }
+            //vi stänger $stmt objektet för att kunna utföra fler PDO funktioner.
             $stmt->closeCursor();
             echo '<br />';
             echo 'summa: $' . $rad['summa'];
             echo '</p>';
             echo '<br /><br /><br />';
-            $index++;
+            $index++; //vi har en index för att kunna få ordning på kvittona.
         }
     ?>
     

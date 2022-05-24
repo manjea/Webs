@@ -2,7 +2,7 @@
 <html lang="sv">
     <head>
         <meta charset="utf-8" />
-        <title>Sessioner</title>
+        <title>BRÖTHERS</title>
         <link href="./inc/styles/style.css" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="./scripts/CartScripts.js"></script>
@@ -23,8 +23,14 @@
                     
                 <hr />
             </section>
-
-
+            <?php
+            if(isset($_SESSION['admin'])){
+                echo '<p style="text-align:center;">
+                <a href="index.php?page=viewUsers">View Users</a>
+            </p>';
+            }
+                
+            ?>
             <?php
                 $p = 'start';
                 if(isset($_GET['page'])){
@@ -41,6 +47,22 @@
 
                     case 'browse':
                         include('./pages/browse.php');
+                        break;
+
+                    case 'viewUsers':
+                        include('./pages/viewUsers.php');
+                        break;
+
+                    case 'editUser':
+                        include('./pages/editUser.php');
+                        break;
+
+                    case 'editedUser':
+                        include('./pages/editedUser.php');
+                        break;
+
+                    case 'userEditUser':
+                        include('./pages/userEditUser.php');
                         break;
 
                     case 'contact':

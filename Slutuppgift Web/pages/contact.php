@@ -6,16 +6,17 @@
         $loggedIn = true;
     }
 
-    if(isset($_POST['send'])){
-        if($_SESSION["CSRFToken"] === $_POST["CSRFToken"]){
+    if(isset($_POST['send'])){ //om vi försöker skicka ett mail
+        if($_SESSION["CSRFToken"] === $_POST["CSRFToken"]){ //om vi inte spammar
             mailTo();
         }
-        else{
+        else{ //annars blir det error
             $error = true;
+
         }
     }
 
-    $_SESSION["CSRFToken"] = bin2hex(random_bytes(32));
+    $_SESSION["CSRFToken"] = bin2hex(random_bytes(32)); //skapar CSRFToken
 ?>
 
 
@@ -25,7 +26,7 @@
         <fieldset>
             <legend>Contact</legend>
 
-            <input type="hidden" name="CSRFToken" value="<?php echo $_SESSION['CSRFToken'] ?>" />
+            <input type="hidden" name="CSRFToken" value="<?php echo $_SESSION['CSRFToken'] ?>" /> <!-- gömd CSRFToken -->
 
             <p>
                 <label for="namn">Full Name</label><br />
@@ -51,10 +52,13 @@
             <input type="submit" name="send" value="Send"></input>
             <br />
             <?php
-                if(isset($error)){
+                if(isset($error)){ //om dom spammar
                     if($error){
                         echo '<span class="register-error-msg">Sluta spamma mig!!</span>';
                     }
+                }
+                if(isset($_SESSION["errorMsg"])){ //om dom spammar
+                    echo '<span class="register-error-msg">'. $_SESSION["errorMsg"] .'</span>';
                 }
             ?>
 

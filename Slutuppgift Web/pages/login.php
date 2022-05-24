@@ -11,20 +11,21 @@
     $error = false;
     if(isset($_POST['submit'])){
 
-        include_once('db.php');
-        $dbh = connectToDB();
-        $login_result = loginCustomer($dbh);
-        if($login_result){
-            header('Location: index.php?page=start');
+        try {
+            include_once('db.php');
+            $dbh = connectToDB();
+            $login_result = loginCustomer($dbh);
+            if($login_result){
+                header('Location: index.php?page=start');
+            }
+            $error = true;
+        } catch (\Throwable $th) {
+            echo 'Det går inte att ansluta till databasen för tillfället!';
         }
-        $error = true;
     }
 ?>
 
 <section id="main">
-
-    <!-- Lägg till formulär -->
-
     <form action="#" method="post">
         <fieldset>
             <legend>Log In</legend>
@@ -38,7 +39,7 @@
                 <input type="password" name="password" id="pass" required />
             </p>
 
-            <span class="register-error-msg"><?php if($error){ echo 'Det gick inte att logga in'; } else{ echo ''; } ?></span>
+            <span class="register-error-msg"><?php if($error){ echo 'Det gick inte att logga in'; } else{ echo ''; } ?></span> <!-- om det blir error -->
 
 
             <input type="submit" value="Log in" name="submit" />

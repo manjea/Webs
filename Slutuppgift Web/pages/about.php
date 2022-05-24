@@ -10,7 +10,7 @@
         <section id="main">
             <h1>Om</h1>
 
-            <p>about ba</p>
+            <p>Vi på bröthers är stolta för att få gör skillnad !11!!11!</p>
 
         </section>
     </body>
